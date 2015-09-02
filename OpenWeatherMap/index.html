@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="openWeatherMap">
+<head>
+    <title>OpenWeatherMap</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet/less" href="Style/index.less" />
+
+    <script src="Lib/less-1.7.0.min.js"></script>
+    <script src="Lib/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="AutoComplete.js"></script>
+
+</head>
+<body>
+    <div id="header">
+        <h1>Open Weather Map</h1>
+    </div>
+
+    <div id="leftPart">
+        <div ng-controller="getDataCtrl" id="container">
+            <form ng-submit="search()">
+                <div id="locationField">
+                    <input id="autocomplete" placeholder="Your city name" type="text">
+                </div>
+                <button id="search">Search</button>
+            </form>
+            <!--<div id="locationField">-->
+            <!--<input id="autocomplete" placeholder="Your city name" type="text">-->
+            <!--</div>-->
+            <!--<button ng-click="search()">Search</button>-->
+            {{datas}}
+        </div>
+    </div>
+</body>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initAutocomplete"-->
+        <!--async defer></script>-->
+</html>
