@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="openWeatherMap">
+<html ng-app="openWeatherMap" ng-controller="getDataCtrl">
 <head>
     <title>OpenWeatherMap</title>
     <meta charset="utf-8">
@@ -17,22 +17,44 @@
     </div>
 
     <div id="leftPart">
-        <div ng-controller="getDataCtrl" id="container">
+        <div  id="container">
             <form ng-submit="search()">
                 <div id="locationField">
                     <input id="autocomplete" placeholder="Your city name" type="text">
                 </div>
                 <button id="search">Search</button>
             </form>
-            <!--<div id="locationField">-->
-            <!--<input id="autocomplete" placeholder="Your city name" type="text">-->
-            <!--</div>-->
-            <!--<button ng-click="search()">Search</button>-->
-            {{datas}}
+
+            <div id="details" ng-show="showDetails">
+                <div class="city">{{city}},{{country}}
+                    <button ng-click="addToFavorite()">Add to favorite</button>
+                </div>
+                <img ng-src="http://openweathermap.org/img/w/{{weather[0].icon}}.png"> {{main.temp}}
+                <p>{{weather[0].description }}</p>
+                <table>
+                    <tr><td>Wind</td><td>{{wind.speed}}m/s</td></tr>
+                    <tr><td>Pressure</td><td>{{main.pressure}}hpa</td></tr>
+                    <tr><td>Humidity</td><td>{{main.humidity}}%</td></tr>
+                    <tr><td>Minimum temperature</td><td>{{main.temp_min}}</td></tr>
+                    <tr><td>Maximum temperature</td><td>{{main.temp_max}}</td></tr>
+                    <tr><td>Geo coords</td><td>[{{coord.lon}},{{coord.lat}}]</td></tr>
+                </table>
+            </div>
         </div>
+    </div>
+
+    <div id="rightPart">
+        <div>Favorite Citys</div>
+        <table>
+            <tr ng-repeat="city in weathers">
+                <td>{{city.name}}</td>
+                <td>{{city.weather[0].description}}</td>
+                <!--<td>{{city.name}}</td>-->
+            </tr>
+        </table>
     </div>
 </body>
 
-<!--<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initAutocomplete"-->
-        <!--async defer></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
 </html>
